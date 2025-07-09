@@ -4,7 +4,7 @@ function collision_slide_velocity(_position_x, _position_y, _collision_radius, _
 	var _result_velocity_y = _velocity_y;
 	
 	//Loop Variables
-	var _max_iterations = 2;
+	var _max_iterations = 3;
 	var _collided = false;
 	
 	for (var _i = 0; _i < _max_iterations; _i ++) {
@@ -14,12 +14,12 @@ function collision_slide_velocity(_position_x, _position_y, _collision_radius, _
 		
 		_collided = false;
 		
-		for (var _j = 0; _j < array_length(obj_collision.collision_points) - 1; _j++) {
+		for (var _j = 0; _j < array_length(global.collision_lines); _j++) {
 			//Get the Collision Line
-			var _x1 = obj_collision.collision_points[_j][0];
-			var _y1 = obj_collision.collision_points[_j][1];
-			var _x2 = obj_collision.collision_points[_j + 1][0];
-			var _y2 = obj_collision.collision_points[_j + 1][1];
+			var _x1 = global.collision_lines[_j][0];
+			var _y1 = global.collision_lines[_j][1];
+			var _x2 = global.collision_lines[_j][2];
+			var _y2 = global.collision_lines[_j][3];
 			
 			
 			// Bounding box check
