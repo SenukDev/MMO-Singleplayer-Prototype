@@ -18,7 +18,7 @@ if (state = "move" && (point_distance(x, y, move_target_x, move_target_y) > 0.5)
 draw_self();
 
 //Drawing Collision Box
-if (global.show_collisions) {
-	draw_circle(x, y + collision_offset_y, 2, false);
+if (global.debug) {
+	draw_circle(x, y, 2, false);
 	draw_circle(x, y + collision_offset_y, collision_radius, true);
 }

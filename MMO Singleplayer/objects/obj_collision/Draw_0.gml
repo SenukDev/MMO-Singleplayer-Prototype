@@ -1,4 +1,4 @@
-if (global.show_collisions) {
+if (global.debug) {
 	for(var _i = 0; _i < array_length(global.collision_lines); _i++) {
 		draw_circle(global.collision_lines[_i][0], global.collision_lines[_i][1], 2, false);
 		draw_circle(global.collision_lines[_i][2], global.collision_lines[_i][3], 2, false);

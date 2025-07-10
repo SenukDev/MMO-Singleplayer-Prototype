@@ -11,9 +11,13 @@ move_input_type = "target";
 move_input_type_timer = 0;
 move_input_type_timer_threshold = 10;
 
+selected_node = noone;
+
 collision_radius = 8;
 collision_offset_y = -8;
 
+interaction_once_per_cycle = false;
+
 move_speed = 1.5;
 
-global.show_collisions = true;
+global.debug = true;

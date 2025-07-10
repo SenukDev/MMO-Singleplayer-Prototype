@@ -1,6 +1,6 @@
-if (global.show_collisions == true) {
-	global.show_collisions = false;
+if (global.debug == true) {
+	global.debug = false;
 }
 else {
-	global.show_collisions = true;
+	global.debug = true;
 }

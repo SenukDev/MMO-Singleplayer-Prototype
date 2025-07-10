@@ -1,37 +1,19 @@
-if (mouse_check_button_pressed(mb_left)) {
-	move_target_x = mouse_x;
-	move_target_y = mouse_y;
-	move_input_type = "target";
-	move_input_type_timer = 0;
-}
-
-if (mouse_check_button(mb_left)) {
-	var _distance_to_player = point_distance(x,y, mouse_x, mouse_y)
-	
-	if (_distance_to_player >= (move_speed * 2)) {
-		if (move_input_type == "target") {
-			if (move_input_type_timer >= move_input_type_timer_threshold) {
-				move_input_type = "direction";
-			}
-			else {
-				move_input_type_timer ++;
-			}
+//Calculating Current State
+if (selected_node != noone && instance_exists(selected_node)) {
+	var _distance = point_distance(x, y, selected_node.x, selected_node.y + selected_node.interaction_offset_y);
+	if (_distance > selected_node.interaction_radius) {
+		move_target_x = selected_node.x;
+		move_target_y = selected_node.y + selected_node.interaction_offset_y;
+		state = "move";
+	}
+	else {
+		if (state != "interact") {
+			image_index = 0;
 		}
-		else if (move_input_type == "direction") {
-			move_target_x = mouse_x;
-			move_target_y = mouse_y;
-		}
+		state = "interact";
 	}
 }
-
-if (point_distance(x, y, move_target_x, move_target_y) > 0 && move_input_type == "direction") && !mouse_check_button(mb_left) {
-	move_input_type_timer = 0;
-	move_target_x = x;
-	move_target_y = y;
-}
-
-//Calculating Current State
-if (point_distance(x, y, move_target_x, move_target_y) > 0) {
+else if (point_distance(x, y, move_target_x, move_target_y) > 0) {
 	state = "move";
 }
 else {
@@ -85,6 +67,44 @@ switch(state) {
 			move_target_y = y;
 		}
 		break;
+	case "interact":
+		image_xscale = 1;
+		image_speed = 0.4;
+		switch(floor((facing_direction + 45) / 90)) {
+			case 0:
+				sprite_index = spr_player_interact_right;
+				break;
+			case 1:
+				sprite_index = spr_player_interact_up;
+				break;
+			case 2:
+				sprite_index = spr_player_interact_left;
+				break;
+			case 3:
+				sprite_index = spr_player_interact_down;
+				break;
+			default:
+				sprite_index = spr_player_interact_right;
+				break;
+		}
+		
+		if (image_index < 1) {
+			interaction_once_per_cycle = false;
+		}
+		else if (interaction_once_per_cycle == false){
+			interaction_once_per_cycle = true;
+			selected_node.interacted = true;
+		}
+		
+		if (selected_node.selectable == false && image_index >= 2) {
+			selected_node = noone;
+		}
+		
+		move_target_x = x;
+		move_target_y = y;
+		
+		velocity_x = 0;
+		velocity_y = 0;
 	default:
 		break;
 }
