@@ -1,5 +1,3 @@
-image_index  = (selectable - 1) * -1;
-
 if (selectable && interacted) {
 	var _random_chopdown = irandom_range(0, 4);
 	
@@ -16,6 +14,8 @@ if (selectable && interacted) {
 	
 	interacted = false;
 }
+
+image_index  = (selectable - 1) * -1;
 
 if (selectable == false && timer <= timer_max) {
 	timer ++;

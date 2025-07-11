@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_tree",
+  "%Name":"obj_sawmill",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_tree",
+  "name":"obj_sawmill",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_tree",
-    "path":"sprites/spr_tree/spr_tree.yy",
+    "name":"spr_sawmill",
+    "path":"sprites/spr_sawmill/spr_sawmill.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -1,8 +1,12 @@
-image_speed = 0;
+//Parent Inheritance
+event_inherited()
+
+//Tree Specific Variables
 interaction_radius = 26;
 interaction_offset_y = -4;
-interacted = false;
-selectable = true;
+
+image_speed = 0;
+
 timer = 0;
 timer_max = 90;
 
