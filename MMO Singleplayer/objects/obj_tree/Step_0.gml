@@ -1,10 +1,17 @@
 image_index  = (selectable - 1) * -1;
 
 if (selectable && interacted) {
-	var _random = irandom_range(0,4)
+	var _random_chopdown = irandom_range(0, 4);
 	
-	if (_random == 0) {
+	if (_random_chopdown == 0) {
+		inventory_add(INVENTORY_ITEMS.LOG, 3)
 		selectable = false;
+	}
+	else {
+		var _random_gain_log = irandom_range(0, 2);
+		if (_random_gain_log == 0) {
+			inventory_add(INVENTORY_ITEMS.LOG, 1)
+		}
 	}
 	
 	interacted = false;

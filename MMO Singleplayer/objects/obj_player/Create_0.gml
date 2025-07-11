@@ -21,3 +21,10 @@ interaction_once_per_cycle = false;
 move_speed = 1.5;
 
 global.debug = true;
+
+inventory = array_create(2, 0);
+
+enum INVENTORY_ITEMS {
+	LOG,
+	PLANK
+}

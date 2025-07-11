@@ -22,3 +22,12 @@ if (global.debug) {
 	draw_circle(x, y, 2, false);
 	draw_circle(x, y + collision_offset_y, collision_radius, true);
 }
+
+
+//Drawing Inventory
+draw_set_font(fnt_nunito_12);
+
+for(var _i = 0; _i < array_length(inventory); _i ++) {
+	draw_sprite(spr_inventory, _i, 20, 20 + (32 + 2) * _i)
+	draw_text(40, 10 + (32 + 2) * _i, string(inventory[_i]));
+}
