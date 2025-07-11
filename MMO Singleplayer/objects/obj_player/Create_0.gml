@@ -20,11 +20,33 @@ interaction_once_per_cycle = false;
 
 move_speed = 1.5;
 
-global.debug = true;
-
-inventory = array_create(2, 0);
+global.debug = false;
 
 enum INVENTORY_ITEMS {
 	LOG,
 	PLANK
 }
+
+enum CRAFTING_TOOLS {
+	NOTHING,
+	AXE_TIER_1
+}
+
+enum TOOLS {
+	NOTHING,
+	AXE_0,
+	AXE_1,
+	AXE_2
+}
+
+inventory = array_create(2, 0);
+
+crafting = CRAFTING_TOOLS.NOTHING;
+crafting_timer = 0;
+crafting_timer_max = 60;
+
+reveal = TOOLS.NOTHING;
+
+tool_axe = TOOLS.AXE_0;
+tool_axe_multiplier = 1;
+

@@ -1,5 +1,8 @@
 //Calculating Current State
-if (selected_node != noone && instance_exists(selected_node)) {
+if (crafting != CRAFTING_TOOLS.NOTHING) {
+	state = "craft"
+}
+else if (selected_node != noone && instance_exists(selected_node)) {
 	var _distance = point_distance(x, y, selected_node.x, selected_node.y + selected_node.interaction_offset_y);
 	if (_distance > selected_node.interaction_radius) {
 		move_target_x = selected_node.x;
@@ -23,10 +26,17 @@ else {
 //State
 switch(state) {
 	case "idle":
-		sprite_index = spr_player_idle;
 		image_speed = 0;
-		image_index = floor((facing_direction + 45) / 90);
 		image_xscale = 1;
+		image_index = 0
+		
+		if (reveal == TOOLS.NOTHING) {
+			sprite_index = spr_player_idle;
+			image_index = floor((facing_direction + 45) / 90);
+		}
+		else {
+			sprite_index = spr_player_reveal;
+		}
 		
 		move_target_x = x;
 		move_target_y = y;
@@ -66,6 +76,8 @@ switch(state) {
 			move_target_x = x;
 			move_target_y = y;
 		}
+		
+		reveal = TOOLS.NOTHING;
 		break;
 	case "interact":
 		image_xscale = 1;
@@ -105,9 +117,60 @@ switch(state) {
 		
 		velocity_x = 0;
 		velocity_y = 0;
+		
+		reveal = TOOLS.NOTHING;
+		break;
+	case "craft":
+		sprite_index = spr_player_craft;
+		image_xscale = 1;
+		image_speed = 1;
+		
+		move_target_x = x;
+		move_target_y = y;
+		
+		velocity_x = 0;
+		velocity_y = 0;
+		
+		crafting_timer ++;
+		
+		if (crafting_timer >= crafting_timer_max) {
+			switch(crafting) {
+				case CRAFTING_TOOLS.AXE_TIER_1:
+					var _random_blue = irandom_range(0,2)
+					var _random_gold = irandom_range(0,99)
+					
+					if (_random_gold == 0) {
+						reveal = TOOLS.AXE_2;
+						if (tool_axe == TOOLS.AXE_0 || tool_axe == TOOLS.AXE_1) {
+							message_popup("New Axe Unlocked")
+							tool_axe = TOOLS.AXE_2;
+							tool_axe_multiplier = 10;
+						}
+					}
+					else if (_random_blue == 0) {
+						reveal = TOOLS.AXE_1;
+						if (tool_axe == TOOLS.AXE_0) {
+							message_popup("New Axe Unlocked")
+							tool_axe = TOOLS.AXE_1;
+							tool_axe_multiplier = 2;
+						}
+					}
+					else {
+						reveal = TOOLS.AXE_0;
+					}
+					break;
+			}
+			
+			
+			crafting = CRAFTING_TOOLS.NOTHING;
+			
+		}
+		break;
 	default:
 		break;
 }
 
 x += velocity_x;
 y += velocity_y;
+
+depth = -y;
